@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EnvyClient — Лучший клиент для DDnet</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: #0a0e17;
+      color: #e2e8f0;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10, 14, 23, 0.9);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(0, 200, 255, 0.12);
+      padding: 14px 0;
+    }
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: #00d4ff;
+      font-weight: 700;
+      font-size: 1.35rem;
+    }
+
+    .logo img {
+      height: 40px;
+      filter: drop-shadow(0 0 12px rgba(0, 212, 255, 0.5));
+    }
+
+    nav a {
+      color: #94a3b8;
+      text-decoration: none;
+      margin-left: 28px;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: #00d4ff;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 110px 0 90px;
+      text-align: center;
+      background: radial-gradient(ellipse at 50% 0%, rgba(0, 160, 255, 0.15) 0%, transparent 65%);
+    }
+
+    .hero h1 {
+      font-size: 3.6rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, #00e0ff, #0090ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 18px;
+      letter-spacing: -0.5px;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      color: #94a3b8;
+      max-width: 580px;
+      margin: 0 auto 40px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 16px 42px;
+      background: linear-gradient(135deg, #00c6ff, #0072ff);
+      color: white;
+      font-weight: 600;
+      font-size: 1.05rem;
+      border-radius: 50px;
+      text-decoration: none;
+      box-shadow: 0 8px 30px rgba(0, 150, 255, 0.35);
+      transition: all 0.25s;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(0, 180, 255, 0.5);
+    }
+
+    /* Screenshots */
+    .screenshots {
+      padding: 70px 0 40px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: #f1f5f9;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: #64748b;
+      margin-bottom: 50px;
+      font-size: 1.05rem;
+    }
+
+    .main-screen {
+      margin-bottom: 28px;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 180, 255, 0.2);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    }
+
+    .main-screen img {
+      width: 100%;
+      display: block;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .gallery img {
+      width: 100%;
+      border-radius: 14px;
+      border: 1px solid rgba(0, 160, 255, 0.18);
+      transition: all 0.3s;
+    }
+
+    .gallery img:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 15px 40px rgba(0, 140, 255, 0.25);
+      border-color: rgba(0, 200, 255, 0.4);
+    }
+
+    /* Features */
+    .features {
+      padding: 80px 0;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 22px;
+    }
+
+    .card {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(0, 150, 255, 0.15);
+      border-radius: 18px;
+      padding: 28px 26px;
+      transition: all 0.3s;
+    }
+
+    .card:hover {
+      border-color: rgba(0, 200, 255, 0.4);
+      transform: translateY(-5px);
+      background: rgba(15, 30, 55, 0.8);
+    }
+
+    .card h3 {
+      color: #00d4ff;
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    .card p {
+      color: #94a3b8;
+      font-size: 0.97rem;
+      line-height: 1.55;
+    }
+
+    /* Download */
+    .download {
+      padding: 90px 0;
+      text-align: center;
+      background: linear-gradient(180deg, transparent, rgba(0, 80, 180, 0.07));
+    }
+
+    .download h2 {
+      font-size: 2.1rem;
+      margin-bottom: 12px;
+      color: #f1f5f9;
+    }
+
+    .download p {
+      color: #64748b;
+      margin-bottom: 40px;
+    }
+
+    .download-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-platform {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px 30px;
+      background: rgba(0, 40, 90, 0.5);
+      border: 1px solid rgba(0, 180, 255, 0.25);
+      color: #e2e8f0;
+      border-radius: 14px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.25s;
+    }
+
+    .btn-platform:hover {
+      background: rgba(0, 100, 200, 0.25);
+      border-color: #00d4ff;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(0, 150, 255, 0.2);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 35px 20px;
+      color: #475569;
+      font-size: 0.9rem;
+      border-top: 1px solid rgba(0, 100, 180, 0.12);
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.5rem; }
+      nav { display: none; }
+      .gallery { grid-template-columns: 1fr; }
+      .hero { padding: 80px 0 60px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container header-inner">
+      <a href="#" class="logo">
+        <img src="logo.png" alt="EnvyClient">
+        EnvyClient
+      </a>
+      <nav>
+        <a href="#screenshots">Скриншоты</a>
+        <a href="#features">Возможности</a>
+        <a href="#download">Скачать</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <h1>EnvyClient</h1>
+      <p>Продвинутый клиент для DDnet с мощным аимботом, системой авто-спасения, TAS и огромным количеством визуальных настроек.</p>
+      <a href="#download" class="btn">Скачать бесплатно</a>
+    </div>
+  </section>
+
+  <section class="screenshots" id="screenshots">
+    <div class="container">
+      <h2 class="section-title">Интерфейс клиента</h2>
+      <p class="section-subtitle">Современный и удобный дизайн</p>
+
+      <!-- Главный экран -->
+      <div class="main-screen">
+        <img src="screen1.png" alt="Главное меню EnvyClient">
+      </div>
+
+      <!-- Остальные скриншоты -->
+      <div class="gallery">
+        <img src="screen5.png" alt="Aimbot">
+        <img src="screen2.png" alt="Avoid">
+        <img src="screen3.png" alt="TAS">
+        <img src="screen4.png" alt="Visuals">
+      </div>
+    </div>
+  </section>
+
+  <section class="features" id="features">
+    <div class="container">
+      <h2 class="section-title">Возможности</h2>
+      <p class="section-subtitle">Всё, что нужно для комфортной и эффективной игры</p>
+
+      <div class="features-grid">
+        <div class="card">
+          <h3>Aimbot</h3>
+          <p>Точный аим с настройкой FOV, Silent Aim, Perfect Silent, приоритетами целей и поддержкой всех видов оружия (Hook, Hammer, Gun, Shotgun, Grenade).</p>
+        </div>
+        <div class="card">
+          <h3>Avoid System</h3>
+          <p>Умная система автоматического спасения от опасных тайлов. Режимы Legit и Blatant, настройка опасных тайлов и Rescue Aim.</p>
+        </div>
+        <div class="card">
+          <h3>TAS</h3>
+          <p>Полноценный Tool-Assisted Speedrun. Запись, пауза, воспроизведение, библиотека записей и импорт .tas файлов.</p>
+        </div>
+        <div class="card">
+          <h3>Visuals</h3>
+          <p>Огромное количество визуальных настроек: ушки, хвост, крылья, кагуне, эффекты, кастомные лица и анимации AFK.</p>
+        </div>
+        <div class="card">
+          <h3>Удобный интерфейс</h3>
+          <p>Современное тёмное меню с вкладками, хоткеями, профилями и мгновенным применением всех настроек.</p>
+        </div>
+        <div class="card">
+          <h3>Бесплатно и удобно</h3>
+          <p>Полностью бесплатный клиент. Поддержка Windows, Android и Linux. Регулярные обновления.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="download" id="download">
+    <div class="container">
+      <h2>Скачать EnvyClient</h2>
+      <p>Выберите свою платформу</p>
+      <div class="download-buttons">
+        <a href="EnvyClient.zip" class="btn-platform">Windows (.zip)</a>
+        <a href="EnvyClient.apk" class="btn-platform">Android (.apk)</a>
+        <a href="EnvyClient.tar.gz" class="btn-platform">Linux (.tar.gz)</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    EnvyClient © 2026 • Клиент для DDnet
+  </footer>
+
+</body>
+</html>
